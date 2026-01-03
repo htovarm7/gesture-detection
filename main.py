@@ -77,17 +77,21 @@ with mp_holistic.Holistic(
         seq_buffer.append(landmarks)
         if len(seq_buffer) > T:
             seq_buffer.pop(0)
+        
         gesture_pred_name = "-"
         if len(seq_buffer) == T:
             seq_array = np.expand_dims(np.array(seq_buffer), axis=0)  
             pred_probs = lstm_model.predict(seq_array, verbose=0)
             gesture_pred_name = gesture_labels[np.argmax(pred_probs)]
 
-        cv2.putText(image, f"Pose: {pose_pred_name}", (10,30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,255,0), 2)
-        cv2.putText(image, f"Gesture: {gesture_pred_name}", (10,70), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,255), 2)
+        display_image = cv2.flip(image, 1)
 
-        cv2.imshow("Pose + Gesture Detection", cv2.flip(image, 1))
-        if cv2.waitKey(5) & 0xFF == 27:  # ESC to quit
+        cv2.putText(display_image, f"Pose: {pose_pred_name}", (10,30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,255,0), 2)
+        cv2.putText(display_image, f"Gesture: {gesture_pred_name}", (10,70), cv2.FONT_HERSHEY_SIMPLEX, 1, (0,0,255), 2)
+
+        cv2.imshow("Pose + Gesture Detection", display_image)
+        
+        if cv2.waitKey(5) & 0xFF == 27:  
             break
 
 cap.release()
