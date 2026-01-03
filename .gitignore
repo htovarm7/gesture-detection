@@ -2,9 +2,9 @@
 .env
 /dataset/Dynamic/waving/*
 /dataset/Static/lying/*
-/dataset/Static/pointing/left/*
-/dataset/Static/pointing/right/*
-/dataset/Static/raising_arm/left/*
-/dataset/Static/raising_arm/right/*
+/dataset/Static/pointing_left/*
+/dataset/Static/pointing_right/*
+/dataset/Static/raising_arm_left/*
+/dataset/Static/raising_arm_right/*
 /dataset/Static/sitting/*
 /dataset/Static/standing/*
